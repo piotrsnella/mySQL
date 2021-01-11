@@ -1,0 +1,80 @@
+1.
+
+
+SELECT
+    p.nazwisko,
+    p.etat,
+    p.id_zesp,
+    z.nazwa
+FROM
+    pracownicy p JOIN zespoly z ON p.id_zesp = z.id_zesp
+	
+	
+2.
+
+SELECT
+    p.nazwisko
+FROM
+    pracownicy p JOIN zespoly z ON p.id_zesp = z.id_zesp
+WHERE
+    z.adres = 'PIOTROWO 3A'
+ORDER BY
+    p.nazwisko
+	
+3.
+
+SELECT
+    p.nazwisko,
+    z.adres,
+    z.nazwa
+FROM
+    pracownicy p JOIN zespoly z ON p.id_zesp = z.id_zesp
+WHERE
+    p.placa_pod > 400
+	
+4.
+
+SELECT
+    p.nazwisko,
+    p.placa_pod,
+    e.placa_min,
+    e.placa_max
+FROM
+    pracownicy p JOIN etaty e ON p.etat = e.nazwa
+	
+5.
+
+SELECT
+    p.nazwisko,
+    p.etat
+FROM
+    pracownicy   p
+    JOIN etaty e ON p.placa_pod BETWEEN e.placa_min and e_placa_max 
+WHERE
+    e.nazwa = 'SEKRETARKA'
+	
+	
+6.
+
+SELECT
+    p.nazwisko,
+    p.etat,
+    z.nazwa,
+    placa_min,
+    placa_max
+FROM
+    pracownicy p
+    JOIN zespoly z ON p.id_zesp = z.id_zesp
+    JOIN etaty  e  on p.etat = e.nazwa
+WHERE p.etat != 'ASYSTENT'
+
+
+7.
+
+SELECT
+    COUNT(p.nazwisko)
+FROM
+    pracownicy p
+    JOIN zespoly z ON p.id_zesp = z.id_zesp
+WHERE z.adres not like 'P%'
+

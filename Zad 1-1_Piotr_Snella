@@ -1,0 +1,152 @@
+Zadania 1-1
+
+1.
+
+SELECT
+    NAZWISKO,
+    (PLACA_POD + NVL(placa_dod,0))* 12 as roczna_placa
+FROM
+    PRACOWNICY;
+	
+2.
+
+SELECT
+    id_zesp,
+    nazwa,
+    adres
+FROM
+    zespoly
+ORDER BY
+    nazwa asc;
+	
+3.
+
+SELECT DISTINCT 
+    etat
+FROM
+    pracownicy;
+	
+4.
+
+SELECT
+    id_prac,
+    nazwisko,
+    etat,
+    id_szefa,
+    zatrudniony,
+    placa_pod,
+    placa_dod,
+    id_zesp
+FROM
+    pracownicy
+WHERE
+    etat = 'ASYSTENT'
+ORDER BY
+    zatrudniony desc;
+    
+5.
+
+SELECT
+    id_prac,
+    nazwisko,
+    etat
+FROM
+    pracownicy
+WHERE
+    id_zesp = '30' OR id_zesp = '40'
+ORDER BY
+    zatrudniony desc; 
+	
+6.
+
+SELECT
+    nazwisko,
+    placa_pod
+FROM
+    pracownicy
+WHERE
+    placa_pod > 300 and placa_pod <800; 
+	
+7.
+
+SELECT
+    nazwisko,
+    etat,
+    placa_pod
+FROM
+    pracownicy
+WHERE
+    nazwisko like '%IK'; 
+    
+8.
+
+SELECT
+    nazwisko,
+    placa_pod
+FROM
+    pracownicy
+WHERE
+    placa_pod  > 1000 and
+    id_szefa is not null;
+	
+9.
+
+SELECT
+    nazwisko,
+    etat,
+    placa_pod/160 as stawka_godzinowa
+FROM
+    pracownicy
+WHERE
+    etat NOT IN ('ADIUNKT', 'ASYSTENT','STAZYSTA')
+    AND placa_pod NOT BETWEEN 400 AND 800
+ORDER BY
+     placa_pod/160 asc;
+	 
+10.
+
+SELECT
+    id_prac,
+    nazwisko,
+    etat,
+    id_szefa,
+    zatrudniony,
+    placa_pod,
+    placa_dod,
+    id_zesp
+FROM
+    pracownicy
+WHERE
+    nazwisko like '%Y' AND
+    placa_dod is Null
+ORDER BY
+    id_szefa desc;
+	
+11.
+
+SELECT 
+    nazwisko
+FROM
+    pracownicy
+WHERE
+    id_szefa = 130;
+	
+12.
+
+SELECT 
+    nazwisko
+FROM
+    pracownicy
+WHERE
+    ((PLACA_POD + NVL(placa_dod,0))* 60) / 2 >24000;
+	
+13.
+
+SELECT
+    nazwa
+FROM
+    etaty
+WHERE
+    placa_min <=  380 AND
+    placa_max >= 380;
+

@@ -1,0 +1,85 @@
+1.
+
+SELECT
+    min(placa_pod) as min,
+    max(placa_pod) as max,
+    max(placa_pod) - min(placa_pod) as diff
+FROM
+    pracownicy;
+	
+2.
+SELECT
+    etat,
+    AVG(placa_pod) as avg
+FROM
+    pracownicy
+GROUP BY etat
+ORDER BY avg(placa_pod) desc;
+
+3.
+
+SELECT
+    COUNT(etat)
+FROM
+    pracownicy
+GROUP BY etat
+Having etat ='PROFESOR'
+
+4.
+
+SELECT
+    id_zesp,
+    SUM(placa_pod) as sum
+FROM
+    pracownicy
+GROUP BY id_zesp
+
+5.
+
+SELECT
+    id_szefa,
+    min(placa_pod) as najgorzej
+FROM
+    pracownicy
+GROUP BY id_szefa
+ORDER BY min(placa_pod) asc;
+
+6.
+
+SELECT
+    etat,
+    AVG(placa_pod) as avg
+FROM
+    pracownicy
+GROUP BY etat
+HAVING etat in ('PROFESOR','ADIUNKT');
+
+7.
+
+select 
+    id_zesp,
+    Sum(placa_pod) + 2 * id_zesp
+from pracownicy
+group by id_zesp
+
+8.
+
+select 
+    COUNT(nazwisko) as ile
+from pracownicy
+WHERE nazwisko like '%O%' and nazwisko like '%R%'
+
+9.
+
+SELECT
+    id_zesp,
+    round(SUM((((((((((placa_pod * 1.1) * 1.1) * 1.1) * 1.1) * 1.1) * 1.1) * 1.1) * 1.1) * 1.1) * 1.1)) AS po_podwyzce
+FROM
+    pracownicy
+GROUP BY
+    id_zesp
+HAVING
+    SUM((((((((((placa_pod * 1.1) * 1.1) * 1.1) * 1.1) * 1.1) * 1.1) * 1.1) * 1.1) * 1.1) * 1.1) > 5000
+	
+	
+

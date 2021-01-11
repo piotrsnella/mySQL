@@ -1,0 +1,65 @@
+2.1
+
+SELECT
+    nazwisko,
+    CONCAT(SUBSTR(etat,1,2),id_prac) as kod
+FROM
+    pracownicy;
+	
+2.2
+
+SELECT
+    nazwisko,
+    REPLACE(REPLACE(REPLACE(nazwisko,'L','X'),'J','X'),'K','X')
+FROM
+    pracownicy;
+	
+2.3
+
+SELECT
+    nazwisko,
+    ROUND((PLACA_POD + NVL(placa_dod,0)) * 0.15 + (PLACA_POD + NVL(placa_dod,0)),2) as powiekszona
+FROM
+    pracownicy;
+	
+2.4
+
+SELECT
+    nazwisko,
+   TRUNC((to_date('2019-12-10') - to_date(zatrudniony))/365.242199) as diff
+FROM
+    pracownicy;
+	
+2.5
+
+SELECT
+   ROUND((POWER(MOD(134,8)*SQRT(81),4))/244,4)+0.0097 as  wynik
+FROM
+    dual;
+	
+2.6
+
+SELECT
+    nazwisko,
+    CASE 
+        WHEN (to_date('2019-12-10') - to_date(zatrudniony)) > 5000 THEN 'pracuje ponad 5000 dni'
+        ELSE '-----' END as opis
+    
+FROM
+    pracownicy;
+	
+2.7
+
+SELECT
+    nazwisko,
+    RPAD(nazwisko,8,'Z') as wynik
+FROM
+    pracownicy;
+	
+2.8
+
+SELECT
+    nazwisko,
+    CONCAT(SUBSTR(nazwisko,0,LENGTH(nazwisko)-3),REVERSE(SUBSTR(nazwisko, LENGTH(nazwisko)-2, 3))) as kodzik
+FROM
+    pracownicy;

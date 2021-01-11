@@ -1,0 +1,150 @@
+1.1 
+SELECT
+    nazwisko,
+    PLACA_POD + NVL(placa_dod,0) as pensja,
+    1.20 * placa_pod as po_podwyzce
+FROM
+    pracownicy
+WHERE
+    zatrudniony > '1995-01-01' and
+    etat = 'PROFESOR' and
+    (PLACA_POD + NVL(placa_dod,0)) >836;
+	
+1.2
+
+SELECT
+    nazwisko
+FROM
+    pracownicy
+WHERE
+    id_zesp = '20' and
+    etat = 'ADIUNKT' and
+    (1.25 * placa_pod) > 600;
+ 
+1.3 
+
+SELECT
+    nazwisko,
+    (PLACA_POD + NVL(placa_dod,0))* 9 as wydano
+FROM
+    pracownicy
+WHERE
+    etat = 'ASYSTENT'
+ORDER BY
+    ((PLACA_POD + NVL(placa_dod,0))* 9) desc;
+    
+1.4
+
+SELECT
+    nazwisko
+FROM
+    pracownicy
+WHERE
+    etat = 'PROFESOR' and
+    placa_pod between 840 and 1340
+ORDER BY
+    nazwisko asc;
+	
+1.5 
+
+SELECT
+    nazwisko,
+    (PLACA_POD + NVL(placa_dod,0))* 0.1 + (PLACA_POD + NVL(placa_dod,0))*12 as koszty
+FROM
+    pracownicy;
+    
+1.6
+
+SELECT
+    nazwisko,
+    (PLACA_POD + NVL(placa_dod,0)) as placa
+FROM
+    pracownicy
+WHERE
+    etat = 'ASYSTENT' and
+    nazwisko like '%L%';
+    
+    
+1.7
+
+SELECT
+    nazwisko,
+    id_zesp,
+    etat,
+    placa_pod*12*0.3 as do_us
+FROM
+    pracownicy
+WHERE
+    placa_dod is null;
+	
+1.8
+
+SELECT
+    nazwisko,
+    (((PLACA_POD + NVL(placa_dod,0))/20)/8)/60 as zarobki_na_minute
+FROM
+    pracownicy;
+	
+1.9
+
+SELECT
+    nazwisko,
+    etat,
+    id_zesp
+FROM
+    pracownicy
+WHERE
+    id_zesp = 10
+    OR id_zesp = 40
+    AND etat NOT LIKE 'ASYSTENT'
+    AND etat NOT LIKE 'ADIUNKT'
+	
+1.10
+
+
+SELECT
+    nazwisko
+FROM
+    pracownicy
+WHERE
+    nazwisko LIKE '%A%'
+    AND placa_dod > 150
+    AND id_zesp NOT IN 20
+    AND etat NOT LIKE 'ASYSTENT'
+    AND etat NOT LIKE 'PROFESOR';
+	
+1.11 
+
+SELECT
+    nazwisko
+FROM
+    pracownicy
+WHERE
+    id_szefa LIKE '120'
+    AND id_zesp LIKE '30';
+	
+1.12
+
+SELECT
+    adres
+FROM
+    zespoly
+WHERE
+    nazwa LIKE 'BADANIA OPERACYJNE';
+	
+1.13
+
+SELECT
+    etat
+FROM
+    pracownicy
+WHERE
+    nazwisko LIKE 'MIODEK'
+    OR nazwisko LIKE 'CZARNY'
+    AND id_szefa LIKE '130'
+    AND placa_dod > 100;
+
+
+
+
+

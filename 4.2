@@ -1,0 +1,49 @@
+1.
+
+SELECT
+    *
+FROM
+    pracownicy p 
+    JOIN etaty e ON p.etat = e.nazwa
+WHERE ((p.PLACA_POD + NVL(p.placa_dod,0))* 12) > 5500
+
+2.
+
+SELECT
+    p.nazwisko nazwisko_szefa,
+    p.id_prac id_szefa,
+    s.id_prac id_pracownika,
+    s.nazwisko nazwisko_pracownika
+    
+FROM
+    pracownicy p 
+    JOIN pracownicy s ON p.id_prac = s.id_szefa 
+	
+3.
+
+SELECT
+    p.nazwisko nazwisko_szefa,
+    p.id_prac id_szefa,
+    s.id_prac id_pracownika,
+    s.nazwisko nazwisko_pracownika
+    
+FROM
+    pracownicy p 
+    RIGHT JOIN pracownicy s ON p.id_prac = s.id_szefa
+WHERE
+    s.id_szefa  is  NULL
+
+
+4.
+
+SELECT
+    id_zesp,
+    COUNT(nazwisko),
+    ROUND(AVG(placa_pod + nvl(placa_dod, 0)),2) AS pracownikow
+FROM
+    pracownicy
+GROUP BY
+    id_zesp
+	
+5.
+

@@ -1,0 +1,73 @@
+1.
+
+SELECT 
+    id_zesp,
+    COUNT(nazwisko) as counter
+FROM pracownicy
+GROUP BY id_zesp
+ORDER BY COUNT(nazwisko) desc;
+
+2.
+
+SELECT 
+    id_zesp,
+    COUNT(nazwisko) as counter
+FROM pracownicy
+GROUP BY id_zesp
+HAVING COUNT(nazwisko) > 3
+ORDER BY COUNT(nazwisko) desc;
+
+3.
+
+SELECT 
+    id_zesp,
+    etat,
+    ROUND(sum(placa_pod),1) as sum,
+    ROUND(avg(placa_pod), 2) as avg
+FROM pracownicy
+GROUP BY id_zesp, etat
+HAVING etat in ('PROFESOR','ASYSTENT')
+ORDER BY id_zesp asc
+
+4.
+
+SELECT 
+    to_char(zatrudniony,'YYYY') as rok,
+    COUNT(to_char(zatrudniony,'YYYY')) as counter
+    
+FROM pracownicy
+GROUP BY to_char(zatrudniony,'YYYY')
+ORDER BY to_char(zatrudniony,'YYYY') asc
+
+5.
+
+SELECT 
+    LENGTH(nazwisko) as liczba_liter,
+    COUNT(LENGTH(nazwisko))
+FROM pracownicy
+GROUP BY LENGTH(nazwisko);
+
+6.
+
+SELECT 
+    to_char(zatrudniony, 'YYYY') as rok,
+    to_char(zatrudniony, 'MM') as miesiac,
+    COUNT(to_char(zatrudniony, 'MM'))  as COUNTER
+    
+FROM pracownicy
+GROUP BY to_char(zatrudniony, 'YYYY'),to_char(zatrudniony, 'MM')
+ORDER BY to_char(zatrudniony, 'YYYY') asc
+
+7.
+
+SELECT 
+    SUBSTR(nazwisko,-1,1) as ostatnia,
+    COUNT(SUBSTR(nazwisko,-1,1)) as COUNTER
+FROM
+    pracownicy
+GROUP BY SUBSTR(nazwisko,-1,1)
+
+
+
+
+

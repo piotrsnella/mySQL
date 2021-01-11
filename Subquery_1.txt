@@ -1,0 +1,75 @@
+1.
+
+SELECT 
+    e.first_name,
+    e.last_name,
+    j.job_title
+    FROM employees e join jobs j on e.job_id = j.job_id
+WHERE e.department_id =(SELECT
+                    department_id
+                    from employees
+                    WHERE last_name = 'Hunold')
+					
+2.
+
+SELECT
+    *
+FROM
+    employees
+WHERE
+    hire_date = (
+        SELECT
+            MIN(hire_date)
+        FROM
+            employees
+        WHERE
+            job_id = 'FI_ACCOUNT'
+    )
+
+3.
+
+SELECT
+    first_name,
+    last_name,
+    department_id,
+    hire_date
+FROM
+    employees
+WHERE
+    hire_date IN (
+        SELECT
+            MIN(hire_date)
+        FROM
+            employees
+        WHERE
+            department_id IS NOT NULL
+        GROUP BY
+            department_id
+    )
+
+4.
+
+SELECT
+    distinct j.job_id,
+    j.job_title,
+    j.min_salary,
+    j.max_salary
+FROM employees e join jobs j on e.job_id = j.job_id
+
+WHERE e.department_id IN  (SELECT
+                    department_id
+                    from departments
+                    WHERE department_name != 'Marketing')
+					
+5.
+
+select
+first_name,
+last_name,
+salary,
+department_id
+from employees e
+where salary > (select avg(salary) from employees
+where department_id = e.department_id)
+
+

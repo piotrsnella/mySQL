@@ -1,0 +1,103 @@
+2.1
+
+SELECT
+    nazwisko,
+    zatrudniony,
+    add_months(zatrudniony,426) as na_emeryturze,
+    to_date(add_months(zatrudniony,426)) - to_date('2019/12/11') as ile_dni
+    
+FROM
+    pracownicy;
+	
+2.2
+
+SELECT
+    nazwisko,
+    placa_pod,
+    placa_dod,
+CASE 
+    WHEN nazwisko like '%O%' THEN placa_dod *1.1
+    WHEN placa_dod is null then 150
+    ELSE placa_dod
+    END AS Z_O
+FROM
+    pracownicy;
+	
+2.3
+
+SELECT
+    nazwisko,
+    to_char(zatrudniony,'YYYY-MM-DD') as data,
+    to_date(zatrudniony) - to_date('1980/01/01') AS ile_dni,
+    CASE WHEN (to_date(zatrudniony) - to_date('1980/01/01'))>11000 then 'TAK'
+    ELSE 'NIE'
+    END AS wynik
+FROM
+    pracownicy;
+	
+2.4
+
+SELECT
+    nazwisko,
+    placa_pod,
+    placa_pod * 1.05 as po_rok, --nie zaokraglilem, gdyz u Pana w wyniku byly tutaj do 3 miejsc po przecinku
+    ROUND(placa_pod * 1.05 * 1.05 ,2) as po_2_latach,
+    ROUND(placa_pod *1.05*1.05*  1.05,2) as po_3_latach
+FROM
+    pracownicy;
+	
+2.5
+
+SELECT
+    nazwisko,
+    etat,
+    id_zesp,
+    CONCAT(CONCAT(substr(nazwisko, 2, 1), LOWER(substr(etat, 3, 1))), POWER(id_zesp, 2)) as kod
+FROM
+    pracownicy;
+	
+2.6
+
+SELECT
+    nazwisko,
+    etat,
+    to_char(zatrudniony,'YYYY') as year,
+    to_char(zatrudniony,'MM') as month,
+    to_char(zatrudniony, 'DD') as day
+FROM
+    pracownicy
+WHERE
+    LENGTH(nazwisko) < 8 AND
+    (etat like '%A%' or etat like '%E%');
+	
+2.7
+
+SELECT
+    nazwisko,
+    NVL(placa_dod, 0) + placa_pod + id_prac + id_zesp AS wartosc,
+    CASE
+        WHEN MOD(NVL(placa_dod, 0) + placa_pod + id_prac + id_zesp, 3) = 0 THEN 'TAK'
+        ELSE 'NIE'
+    END AS podzielne
+FROM
+    pracownicy;
+	
+2.8
+
+SELECT
+    nazwisko,
+    etat,
+    to_char(zatrudniony, 'YYYY-MM-DD') AS zatrudniony,
+    round(months_between(to_date('2005/01/01'), to_date(zatrudniony)) / 12) AS diff,
+    CASE
+        WHEN months_between(to_date('2005/01/01'), to_date(zatrudniony)) / 12 > 10  THEN
+            'PROFESOR'
+        WHEN months_between(to_date('2005/01/01'), to_date(zatrudniony)) / 12 > 7   THEN
+            'ASYSTENT'
+        ELSE
+            'STAZYSTA'
+    END AS bylby
+FROM
+    pracownicy;
+	
+	
